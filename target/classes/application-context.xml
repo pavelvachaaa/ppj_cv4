@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean name="pingMessage" class="app.assignments.message.PingMessage"/>
+    <bean name="helloMessage" class="app.assignments.message.CustomMessage">
+        <constructor-arg name="sender" value="What"/>
+        <constructor-arg name="recipient" value="The"/>
+        <constructor-arg name="text" value="Actual fuck!"/>
+    </bean>
+    <bean name="pingMessageReply" class="app.assignments.message.ReplyMessage">
+        <constructor-arg name="original" ref="pingMessage"/>
+        <constructor-arg name="reply" value="Reply"/>
+    </bean>
+
+    <bean name="stdoutWriter" class="app.assignments.writer.StdoutWriter"/>
+    <bean name="listWriter" class="app.assignments.writer.ListWriter"/>
+</beans>
