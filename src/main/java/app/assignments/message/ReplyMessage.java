@@ -1,15 +1,17 @@
 package app.assignments.message;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("pingMessageReply")
 public class ReplyMessage implements Message {
 
-    private Message original;
-    private String reply;
+    private final Message original;
+    private final String reply;
 
+    @Autowired
     public ReplyMessage(@Qualifier("pingMessage") Message original,@Value("Reply message") String reply) {
         this.original = original;
         this.reply = reply;

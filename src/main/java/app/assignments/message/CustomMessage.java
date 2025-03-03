@@ -16,13 +16,17 @@
 
 package app.assignments.message;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("helloMessage")
 public class CustomMessage implements Message {
 
+    @Value("Já")
     private String sender;
+    @Value("On")
     private String recipient;
+    @Value("Proč si to dělám")
     private String text;
 
     public CustomMessage() {
