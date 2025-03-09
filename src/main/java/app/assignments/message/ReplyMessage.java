@@ -5,10 +5,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component("pingMessageReply")
 public class ReplyMessage implements Message {
 
-    private final Message original;
+    @Autowired
+    @Qualifier("pingMessage")
+    private  Message original;
     private final String reply;
 
     @Autowired
@@ -16,6 +17,11 @@ public class ReplyMessage implements Message {
         this.original = original;
         this.reply = reply;
     }
+
+    public ReplyMessage() {
+        this.reply = "Reply message";
+    }
+
 
     public String getSender() {
         return original.getRecipient();

@@ -12,6 +12,12 @@ public class ListWriter implements Writer {
 
     private List<Message> buffer = new ArrayList<>();
 
+    public void init() {
+        buffer = new ArrayList<>();
+        System.out.println("ListWriter initialized with an empty buffer.");
+    }
+
+
     public void write(Message message) {
         buffer.add(message);
     }
