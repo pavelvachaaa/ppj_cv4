@@ -1,10 +1,13 @@
 package app.assignments.app;
 
+import app.assignments.message.CustomMessage;
 import app.assignments.message.Message;
+import app.assignments.message.PingMessage;
 import app.assignments.writer.ListWriter;
-import app.assignments.writer.Writer;
+import app.assignments.writer.StdoutWriter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 
 public class Main {
 
@@ -13,19 +16,18 @@ public class Main {
 
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("/application-context.xml");
 
-        Message ping = (Message) applicationContext.getBean("pingMessage");
-        Message hello = (Message) applicationContext.getBean("helloMessage");
-        Message pingReply = (Message) applicationContext.getBean("pingMessageReply");
+        Message ping =applicationContext.getBean(PingMessage.class);
+        Message hello =  applicationContext.getBean(CustomMessage.class);
+        Message pingReply = applicationContext.getBean(PingMessage.class);
 
-        Writer stdoutWriter = (Writer) applicationContext.getBean("stdoutWriter");
-        Writer listWriter = (Writer) applicationContext.getBean("listWriter");
+        StdoutWriter stdoutWriter =  applicationContext.getBean(StdoutWriter.class);
+        ListWriter listWriter =  applicationContext.getBean(ListWriter.class);
         stdoutWriter.write(ping);
         stdoutWriter.write(hello);
         stdoutWriter.write(pingReply);
 
-
         listWriter.write(ping);
-        ((ListWriter) listWriter).listWrittenMessages().forEach(stdoutWriter::write);
+        listWriter.listWrittenMessages().forEach(stdoutWriter::write);
 
     }
 
